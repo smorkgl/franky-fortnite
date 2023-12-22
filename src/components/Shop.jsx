@@ -2,11 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {API_KEY, API_URL} from './config'
 import {Preloader} from './Preloader'
 import {GoodsList} from './GoodsList';
+import Pagination from './Pagination';
+import {Cart} from './Cart'
 
 
 const Shop = () => {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [countriesPerPage] = useState(12);
+    const [order, setOrder] = useState([]);
 
     useEffect(function getGoods() {
         fetch(API_URL, { 
@@ -16,20 +21,47 @@ const Shop = () => {
             .then((data) => {
                 data.shop && setGoods(data.shop);
                 setLoading(false)
-                let arr = data.shop.map(x=>x.price.finalPrice)
-                console.log(arr)
-
                 
+
             })
     }, []) 
 
 
-        
-        return (
+
+
+
+    const lastCountryIndex = currentPage * countriesPerPage ;
+    const firstCountyIndex = lastCountryIndex - countriesPerPage;
+    const currentCountry = goods.slice(firstCountyIndex, lastCountryIndex)
+
+    const paginate = pageNumber => setCurrentPage(pageNumber)
+    const nextPage = () => {
+        const lastPage = Math.ceil(goods.length / countriesPerPage);
+        if (currentPage !== lastPage) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+    const lastPage = () => {
+        if (currentPage !== 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+    
+
+
+         return (
             <main className="container content">
+                <Cart quantity={order.length} />
                 {
-                    loading ? <Preloader /> : <GoodsList goods={goods} />
+                    loading ? <Preloader /> : <GoodsList goods={currentCountry} />
                 }
+                <Pagination 
+                countriesPerPage={countriesPerPage} 
+                totalCountries = {goods.length}
+                paginate={paginate}/>
+
+                <button className="btn-primary" onClick={lastPage}> Prev </button>
+                <button className="btn-primary" onClick={nextPage}> Next </button>
                 </main>
             ) 
 

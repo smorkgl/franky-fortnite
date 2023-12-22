@@ -14,3 +14,44 @@ nav {
     gap: 5rem;
     text-align: center;
 }
+
+.card .card-image .card-title {
+  color: black;
+  position: static;
+  padding: 0;
+}
+
+.row .col.m6 {
+  width: auto;
+}
+
+.card {
+  min-height: 470px;
+}
+
+.price {
+  font-size: 25px;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
+.cart {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 5;
+  padding: 1rem;
+}
+
+@media (min-width: 767px) {
+  .cart {
+    top: 5rem;
+    bottom: unset;
+  }
+}
+
+.cart-quantity {
+
+}
