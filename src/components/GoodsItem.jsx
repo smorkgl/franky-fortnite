@@ -28,7 +28,7 @@ function GoodsItem(props) {
           <div className="card-content">
             <p>{displayDescription}</p>
             <p class="price">{finalPrice} руб</p>
-            <a onClick={() => addToCart({ mainId, displayName, price: { finalPrice } })} className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
+            <a onClick={() => addToCart({ mainId, displayName, price: { finalPrice }, displayType, displayAssets: [{background}], displayDescription })} className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
           </div>
         </div>
       </div>
