@@ -5,14 +5,15 @@ nav {
 .content {
   min-height: calc(100vh - 70px - 64px);
   padding: 1.5rem 0;
+  margin-left: 100px;
 }
 
 .goods {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px , 1fr));
-    grid-gap: 1rem;
-    gap: 5rem;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  gap: 5rem;
+  text-align: center;
 }
 
 .card .card-image .card-title {
@@ -31,19 +32,70 @@ nav {
 
 .price {
   font-size: 25px;
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
 }
 
 .cart {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  right: 1rem;
   cursor: pointer;
   z-index: 5;
   padding: 1rem;
   background-color: #43A047;
+}
+
+.collection {
+  position: fixed;
+  top: 7%;
+  left: 35%;
+  right: 35%;
+  background-color: #26a69a;
+  z-index: 100;
+  overflow: unset;
+
+  animation: show 500ms ease-in-out;
+}
+
+.collection-item {
+  background-color: #26a69a !important;
+  color: #fff;
+}
+
+.summary-price {
+  padding: 20px;
+  color: #fff;
+}
+
+.collection-clear {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 101;
+  margin: -10px;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.imgincircle {
+  margin: 20px 0;
+}
+
+.quantity-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.minusplus {
+  color: #000;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  margin: 0;
+  font-size: 1rem;
 }
 
 @media (min-width: 767px) {
@@ -53,6 +105,14 @@ nav {
   }
 }
 
-.cart-quantity {
+@keyframes show {
+  from {
+    top: 15%;
+    opacity: 0;
+  }
 
+  top {
+    top: 50%;
+    opacity: 1;
+  }
 }
