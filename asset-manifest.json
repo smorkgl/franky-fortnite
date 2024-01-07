@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/franky-fortnite/static/css/main.e8cc4828.css",
+    "main.js": "/franky-fortnite/static/js/main.f34ce1fe.js",
+    "index.html": "/franky-fortnite/index.html",
+    "main.e8cc4828.css.map": "/franky-fortnite/static/css/main.e8cc4828.css.map",
+    "main.f34ce1fe.js.map": "/franky-fortnite/static/js/main.f34ce1fe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e8cc4828.css",
+    "static/js/main.f34ce1fe.js"
+  ]
+}
