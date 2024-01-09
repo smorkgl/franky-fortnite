@@ -52,7 +52,7 @@ nav {
   background-color: #26a69a;
   z-index: 100;
   overflow: unset;
-
+  margin-left: -100px;
   animation: show 500ms ease-in-out;
 }
 
@@ -98,10 +98,18 @@ nav {
   font-size: 1rem;
 }
 
-@media (min-width: 767px) {
+@media (max-width: 767px) {
   .cart {
     top: 5rem;
     bottom: unset;
+  }
+  
+  .content {
+    margin-left: 0px;
+  }
+
+  .container {
+    width: 100%;
   }
 }
 

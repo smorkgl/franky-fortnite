@@ -4,7 +4,7 @@ function Alert(props) {
     const { displayName = '', closeAlert = Function.prototype } = props;
 
     useEffect(() => {
-        const timerId = setTimeout(closeAlert, 100000);
+        const timerId = setTimeout(closeAlert, 3000);
         return () => {
             clearTimeout(timerId)
         }
