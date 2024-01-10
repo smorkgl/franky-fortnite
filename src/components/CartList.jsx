@@ -1,7 +1,13 @@
+import { useContext } from 'react';
 import { CartItem } from './CartItem'
+import { ShopContext } from './context';
 
-function CartList(props) {
-    const { order = [], handleCartShow = Function.prototype, removeFromCart = Function.prototype, cartPlus = Function.prototype, cartMinus = Function.Prototype } = props;
+function CartList() {
+    const {
+         order = [],
+         handleCartShow = Function.prototype,
+    } = useContext(ShopContext)
+ 
     const totalPrice = order.reduce((sum, el) => {
         return sum + el.price.finalPrice * el.quantity
     }, 0);
@@ -10,7 +16,7 @@ function CartList(props) {
         <i className="material-icons collection-clear" onClick={handleCartShow}>clear</i>
         {
             order.length ? order.map(item => (
-                <CartItem key={item.mainId} {...item} removeFromCart={removeFromCart} cartPlus={cartPlus} cartMinus={cartMinus} />
+                <CartItem key={item.mainId} {...item} />
             )) : <li className='collection-item'>Корзина пуста</li>
         }
         <div className="d-flex justify-between">

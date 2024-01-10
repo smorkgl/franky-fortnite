@@ -24,79 +24,11 @@ const Shop = () => {
             }
         }).then((response) => response.json())
             .then((data) => {
-                data.shop && setGoods(data.shop);
-                setLoading(false)
-
-
+               setGoods(data.shop);
+               setLoading(false)
+        
             })
     }, [])
-
-    const addToCart = (item) => {
-        const itemIndex = order.findIndex(orderItem => orderItem.mainId === item.mainId)
-        if (itemIndex < 0) {
-
-            const newItem = {
-                ...item,
-                quantity: 1,
-            }
-            setOrder([...order, newItem])
-        }
-        else {
-            const newOrder = order.map((orderItem, index) => {
-                if (index === itemIndex) {
-                    return {
-                        ...orderItem,
-                        quantity: orderItem.quantity + 1
-                    }
-                }
-                else {
-                    return orderItem;
-                }
-            })
-
-            setOrder(newOrder);
-        }
-        setAlertName(item.displayName);
-    }
-
-    const removeFromCart = (itemId) => {
-        const newOrder = order.filter(el => el.mainId !== itemId)
-        setOrder(newOrder)
-    }
-
-    const cartPlus = (itemId) => {
-        const newOrder = order.map((orderItem) => {
-            if (orderItem.mainId === itemId) {
-                return {
-                    ...orderItem,
-                    quantity: orderItem.quantity + 1,
-                }
-            }
-            return orderItem;
-        });
-        setOrder(newOrder);
-    }
-
-    const cartMinus = (itemId) => {
-        const newOrder = order.map((orderItem) => {
-            if (orderItem.mainId === itemId && orderItem.quantity > 1) {
-                return {
-                    ...orderItem,
-                    quantity: orderItem.quantity - 1,
-                }
-            }
-            return orderItem;
-        });
-        setOrder(newOrder);
-    }
-
-    const handleCartShow = () => {
-        setIsCartShow(!isCartShow)
-    }
-
-    const closeAlert = () => {
-        setAlertName('')
-    }
 
     const lastCountryIndex = currentPage * countriesPerPage;
     const firstCountyIndex = lastCountryIndex - countriesPerPage;
@@ -118,12 +50,12 @@ const Shop = () => {
 
     return (
         <main className="container content">
-            <Cart quantity={order.length} handleCartShow={handleCartShow} />
+            <Cart quantity={order.length} />
             {
-                loading ? <Preloader /> : <GoodsList goods={currentCountry} addToCart={addToCart} />
+                loading ? <Preloader /> : <GoodsList goods={currentCountry}/>
             }
             {
-                isCartShow && <CartList order={order} handleCartShow={handleCartShow} removeFromCart={removeFromCart} cartPlus={cartPlus} cartMinus={cartMinus} />
+                isCartShow && <CartList order={order} />
             }
             <Pagination
                 countriesPerPage={countriesPerPage}
@@ -133,7 +65,7 @@ const Shop = () => {
             <button className="btn-primary" onClick={lastPage}> Prev </button>
             <button className="btn-primary" onClick={nextPage}> Next </button>
             {
-                alertName && <Alert displayName={alertName} closeAlert={closeAlert} />
+                alertName && <Alert displayName={alertName} />
             }
         </main>
     )
