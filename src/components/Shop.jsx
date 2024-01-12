@@ -4,7 +4,8 @@ import { Preloader } from './Preloader'
 import { GoodsList } from './GoodsList';
 import Pagination from './Pagination';
 import { Cart } from './Cart'
-import {CartList} from './CartList'
+import { CartList } from './CartList'
+import { Alert } from './Alert'
 
 
 const Shop = () => {
@@ -14,6 +15,7 @@ const Shop = () => {
     const [countriesPerPage] = useState(12);
     const [order, setOrder] = useState([]);
     const [isCartShow, setIsCartShow] = useState(false);
+    const [alertName, setAlertName] = useState('');
 
     useEffect(function getGoods() {
         fetch(API_URL, {
@@ -22,44 +24,11 @@ const Shop = () => {
             }
         }).then((response) => response.json())
             .then((data) => {
-                data.shop && setGoods(data.shop);
-                setLoading(false)
-
-
+               setGoods(data.shop);
+               setLoading(false)
+        
             })
     }, [])
-
-    const addToCart = (item) => {
-        const itemIndex = order.findIndex(orderItem => orderItem.mainId === item.mainId)
-        if (itemIndex < 0) {
-
-            const newItem = {
-                ...item,
-                quantity: 1,
-            }
-            setOrder([...order, newItem])
-        }
-        else {
-            const newOrder = order.map((orderItem, index) => {
-                if (index === itemIndex) {
-                    return {
-                        ...orderItem,
-                        quantity: orderItem.quantity + 1
-                    }
-                }
-                else {
-                    return orderItem;
-                }
-            })
-
-            setOrder(newOrder);
-            console.log(order);
-        }
-    }
-
-    const handleCartShow = () => {
-        setIsCartShow(!isCartShow)
-    }
 
     const lastCountryIndex = currentPage * countriesPerPage;
     const firstCountyIndex = lastCountryIndex - countriesPerPage;
@@ -81,12 +50,12 @@ const Shop = () => {
 
     return (
         <main className="container content">
-            <Cart quantity={order.length} handleCartShow = {handleCartShow} />
+            <Cart quantity={order.length} />
             {
-                loading ? <Preloader /> : <GoodsList goods={currentCountry} addToCart={addToCart} />
+                loading ? <Preloader /> : <GoodsList goods={currentCountry}/>
             }
             {
-                isCartShow && <CartList order={order}/>
+                isCartShow && <CartList order={order} />
             }
             <Pagination
                 countriesPerPage={countriesPerPage}
@@ -95,8 +64,12 @@ const Shop = () => {
 
             <button className="btn-primary" onClick={lastPage}> Prev </button>
             <button className="btn-primary" onClick={nextPage}> Next </button>
+            {
+                alertName && <Alert displayName={alertName} />
+            }
         </main>
     )
 
 }
+
 export { Shop }

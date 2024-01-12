@@ -1,4 +1,8 @@
+import {useContext} from 'react';
+import {ShopContext} from '../components/context'
+
 function GoodsItem(props) {
+ 
   const {
     mainId,
     displayName,
@@ -10,8 +14,9 @@ function GoodsItem(props) {
     price: {
       finalPrice
     },
-    addToCart = Function.prototype
   } = props;
+
+  const {addToCart} = useContext(ShopContext)
 
   return (
 
